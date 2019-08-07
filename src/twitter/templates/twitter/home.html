@@ -2,4 +2,12 @@
 
 {% block title %}Home{% endblock %}
 
-{% block content %}cokolwiek{% endblock %}
+{% block content %}
+
+{% for tweet in tweets %}
+<p>Content: {{ tweet.content }}</p>
+<p>Author: {{ tweet.user.username }}</p>
+<hr>
+{% endfor %}
+
+{% endblock %}
