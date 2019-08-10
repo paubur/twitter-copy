@@ -5,9 +5,26 @@
 {% block content %}
 
 {% for tweet in tweets %}
-<p>Content: {{ tweet.content }}</p>
-<p>Author: {{ tweet.user.username }}</p>
-<hr>
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th scope="col">{{ tweet.user.username }}</th>
+            <th scope="col">{{ tweet.created_date|date:"Y-m-d H:i" }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="2">{{ tweet.content }}</td>
+        </tr>
+    </tbody>
+</table>
 {% endfor %}
 
+<br>
+{% if request.user.is_authenticated %}
+<form method="POST">
+    <textarea name="content" cols="30" rows="10"></textarea>
+    <input type="button" class="btn btn-primary" value="Publish">
+</form>
+{% endif %}
 {% endblock %}
