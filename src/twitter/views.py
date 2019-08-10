@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.contrib.auth.models import User
 from twitter.models import Tweet
-# Create your views here.
-from django.http import HttpResponse
 
 
 class HomeView(View):
@@ -22,3 +21,11 @@ class HomeView(View):
         )
         # return self.get(request)
         return redirect("/")
+
+
+class UserDetailView(View):
+    def get(self, request, username):
+        tweets = Tweet.objects.filter(user__username=username)
+        return render(request, "twitter/user_detail.html", {
+            "tweets": tweets
+        })

@@ -53,6 +53,28 @@ class TestHomeView(TestCase):
         self.assertEqual(Tweet.objects.count(), 1)
 
 
+class TestUserDetailView(TestCase):
+
+    def setUp(self):
+        self.user = create_user("user1")
+
+    def test_all_user_tweets_displayed(self):
+        tweet1 = Tweet.objects.create(
+            content="Some content",
+            user=self.user
+        )
+        tweet2 = Tweet.objects.create(
+            content="Other content",
+            user=self.user
+        )
+
+        response = self.client.get("/{}/".format(self.user.username))
+        content = response.content.decode("utf-8")
+
+        self.assertIn(tweet1.content, content)
+        self.assertIn(tweet2.content, content)
+
+
 def init_request():
     """Create request object to work with in tests"""
     request_factory = RequestFactory()

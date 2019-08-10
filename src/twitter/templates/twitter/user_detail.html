@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Twitter | User Detail
+{% endblock %}
+
+{% block content %}
+<h1>User Detail</h1>
+{% for tweet in tweets %}
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th scope="col">{{ tweet.user.username }}</th>
+            <th scope="col">{{ tweet.created_date|date:"Y-m-d H:i" }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="2">{{ tweet.content }}</td>
+        </tr>
+    </tbody>
+</table>
+{% endfor %}
+{% endblock %}
