@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.models import User
-from twitter.models import Tweet
+from twitter.models import Tweet, Message
 
 
 class HomeView(View):
@@ -36,4 +36,16 @@ class TweetDetailView(View):
         tweet = Tweet.objects.get(pk=pk)
         return render(request, "twitter/tweet_detail.html", {
             "tweet": tweet
+        })
+
+
+class MessageListView(View):
+    def get(self, request, username):
+        user = User.objects.get(username=username)
+        messages_sent = Message.objects.filter(sender=user)
+        messages_received = Message.objects.filter(receiver=user)
+
+        return render(request, "twitter/user_messages.html", {
+            "messages_sent": messages_sent,
+            "messages_received": messages_received
         })

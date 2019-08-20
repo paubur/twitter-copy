@@ -1,7 +1,7 @@
 from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User
 from twitter.views import HomeView
-from twitter.models import Tweet
+from twitter.models import Tweet, Message
 from django.urls import reverse_lazy
 
 
@@ -94,6 +94,43 @@ class TestTweetDetailView(TestCase):
         return Tweet.objects.create(
             content="content",
             user=user,
+        )
+
+
+class TestMessageListView(TestCase):
+    """Test suite for MessageListView"""
+
+    def test_get_method_displays_all_received_messages(self):
+        receiver = create_user("user1")
+        sender = create_user("user2")
+
+        message1 = self.create_message(sender, receiver)
+        message2 = self.create_message(sender, receiver)
+
+        response = self.client.get("/{}/messages/".format(receiver.username))
+        content = response.content.decode("utf-8")
+
+        self.assertIn(message1.message, content)
+        self.assertIn(message2.message, content)
+
+    def test_get_method_displays_all_sent_messages(self):
+        sender = create_user("user1")
+        receiver = create_user("user2")
+
+        message1 = self.create_message(sender, receiver)
+        message2 = self.create_message(sender, receiver)
+
+        response = self.client.get("/{}/messages/".format(sender.username))
+        content = response.content.decode("utf-8")
+
+        self.assertIn(message1.message, content)
+        self.assertIn(message2.message, content)
+
+    def create_message(self, sender, receiver):
+        return Message.objects.create(
+            message="some message",
+            sender=sender,
+            receiver=receiver
         )
 
 
