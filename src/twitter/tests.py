@@ -75,28 +75,6 @@ class TestUserDetailView(TestCase):
         self.assertIn(tweet2.content, content)
 
 
-class TestTweetDetailView(TestCase):
-    """Test suite for TweetDetailView"""
-
-    def setUp(self):
-        self.user = create_user("user1")
-
-    def test_get_method_tweet_in_content(self):
-        tweet = self.create_tweet(self.user)
-
-        response = self.client.get("/tweet/{}/".format(tweet.pk))
-        content = response.content.decode("utf-8")
-
-        self.assertIn(tweet.content, content)
-        self.assertEqual(response.status_code, 200)
-
-    def create_tweet(self, user):
-        return Tweet.objects.create(
-            content="content",
-            user=user,
-        )
-
-
 def init_request():
     """Create request object to work with in tests"""
     request_factory = RequestFactory()

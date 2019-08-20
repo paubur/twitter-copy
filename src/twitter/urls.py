@@ -1,9 +1,8 @@
 from django.urls import path
 
-from twitter.views import HomeView, UserDetailView, TweetDetailView
+from twitter.views import HomeView, UserDetailView
 
 urlpatterns = [
     path("", HomeView.as_view(), name='home'),
-    path("<str:username>/", UserDetailView.as_view(), name="user_detail"),
-    path("tweet/<int:pk>/", TweetDetailView.as_view(), name="tweet_detail"),
+    path("<str:username>/", UserDetailView.as_view(), name="user_detail")
 ]

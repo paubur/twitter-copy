@@ -29,11 +29,3 @@ class UserDetailView(View):
         return render(request, "twitter/user_detail.html", {
             "tweets": tweets
         })
-
-
-class TweetDetailView(View):
-    def get(self, request, pk):
-        tweet = Tweet.objects.get(pk=pk)
-        return render(request, "twitter/tweet_detail.html", {
-            "tweet": tweet
-        })
