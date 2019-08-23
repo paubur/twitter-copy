@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.models import User
 from twitter.models import Tweet, Message
+from twitter.forms import MessageForm
 
 
 class HomeView(View):
@@ -49,3 +50,15 @@ class MessageListView(View):
             "messages_sent": messages_sent,
             "messages_received": messages_received
         })
+
+
+class MessageFormView(View):
+    def get(self, request):
+        print("im here")
+        form = MessageForm()
+        return render(request, "twitter/message_form.html", {
+            "form": form
+        })
+
+    def post(self, request):
+        pass

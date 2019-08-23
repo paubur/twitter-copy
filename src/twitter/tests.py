@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from twitter.views import HomeView
 from twitter.models import Tweet, Message
 from django.urls import reverse_lazy
+from twitter.forms import MessageForm
 
 
 class TestHomeView(TestCase):
@@ -133,7 +134,6 @@ class TestMessageListView(TestCase):
             receiver=receiver
         )
 
-      
 
 def init_request():
     """Create request object to work with in tests"""
@@ -147,3 +147,13 @@ def create_user(username):
         username=username,
         password="password123"
     )
+
+
+class TestMessageFormView(TestCase):
+    """Test suite for MessageFormView"""
+
+    def test_message_form_passed_to_context_on_get_method(self):
+        response = self.client.get("/send-message/")
+        import pdb
+        pdb.set_trace()
+        self.assertEqual(response.context.get("form"), MessageForm)
