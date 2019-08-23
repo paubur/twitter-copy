@@ -133,6 +133,7 @@ class TestMessageListView(TestCase):
             receiver=receiver
         )
 
+      
 
 def init_request():
     """Create request object to work with in tests"""
