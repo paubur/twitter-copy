@@ -1,5 +1,4 @@
 from django.urls import path
-
 from twitter.views import HomeView, UserDetailView, TweetDetailView, MessageListView
 
 urlpatterns = [
@@ -8,4 +7,4 @@ urlpatterns = [
     path("tweet/<int:pk>/", TweetDetailView.as_view(), name="tweet_detail"),
     path("<str:username>/messages/",
          MessageListView.as_view(), name="user_messages"),
-]
+
