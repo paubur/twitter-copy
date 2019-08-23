@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Twitter | User Messages
+{% endblock %}
+
+{% block content %}
+<h1>Messages</h1>
+<h2>Messages Sent:</h2>
+{% for message in messages_sent %}
+<p>To: {{ message.receiver }}</p>
+<p>Message: {{ message.message }}</p>
+<hr>
+{% endfor %}
+<h2 style="margin-top: 50px;">Messages Received</h2>
+{% for message in messages_received %}
+<p>From: {{ message.sender }}</p>
+<p>Message: {{ message.message }}</p>
+<hr>
+{% endfor %}
+{% endblock %}
+
+TEŻ ZA CHWILĘ WRACAM ;)
