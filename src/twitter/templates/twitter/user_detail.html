@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}
+Twitter | User Detail
+{% endblock %}
 
 {% block content %}
-
+<h1>User Detail</h1>
 {% for tweet in tweets %}
 <table class="table mt-5">
     <thead>
@@ -19,12 +21,4 @@
     </tbody>
 </table>
 {% endfor %}
-
-<br>
-{% if request.user.is_authenticated %}
-<form method="POST">
-    <textarea name="content" cols="30" rows="10"></textarea>
-    <input type="button" class="btn btn-primary" value="Publish">
-</form>
-{% endif %}
 {% endblock %}

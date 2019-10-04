@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Twitter Detail
+{% endblock %}
+
+{% block content %}
+<h1>Twitter Detail</h1>
+<p>{{ tweet.content }}</p>
+<p>Created by: {{ tweet.user.username }}</p>
+{% endblock %}
